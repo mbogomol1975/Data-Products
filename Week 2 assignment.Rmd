@@ -1,0 +1,25 @@
+---
+title: "My Interactive Leaflet Map"
+date: "2/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(leaflet)
+df<-data.frame(lng = c(-122.4169511,-122.4326925, -122.400929, -122.468746), 
+               lat = c(37.8047288,37.7988557, 37.785678, 37.771368))
+
+sfPopup <- c(
+  "<a href='http://www.exploratorium.edu'>Exploratorium</a>",
+  "<a href='http://fortmason.org'>Fort Mason</a>",
+  "<a href='http://www.sfmoma.org/'>SFMOMA</a>",
+  "<a href='http://deyoung.famsf.org'>De Young Museum</a>")
+df %>% leaflet() %>% setView(lat = 37.757815, lng = -122.407640335, zoom = 12) %>%
+      addTiles() %>% 
+      addCircleMarkers(popup=sfPopup, col = "blue")
+```
+
