@@ -1,0 +1,29 @@
+---
+title: "Plotly Assignment"
+date: "February 9, 2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE)
+```
+
+## New York Air Quality Measurements
+```{r}
+library(plotly)
+library(tidyr)
+data("airquality")
+airquality<-replace_na(airquality,as.list(colMeans(airquality,na.rm=T)))
+airquality$Month<-as.factor(airquality$Month)
+levels(airquality$Month)<-c("May","June","July","August","September")
+plot_ly(airquality, x = ~Wind, y = ~Temp, z = ~Ozone, type = "scatter3d", mode = "markers", color = ~Month, marker = list(size = 9, line = list(color = 'black', 
+width = 1))) %>% 
+  layout(title = 'Ozone level, Temperature and Wind speed for each month')
+```
+
+## Temperature changes for each month
+```{r}
+plot_ly(airquality, x = ~Day, y = ~Temp, color = ~Month, mode = "lines") %>% 
+  layout(title = 'Temperature changes for each month')
+```
+
